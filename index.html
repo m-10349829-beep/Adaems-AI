@@ -3,10 +3,432 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adaems AI</title>
-<link rel="stylesheet" href="style.css">
+<title>Adaems AI — Next Generation Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--void:#03030a;--base:#06060f;--l1:#0b0b18;--l2:#10101f;--l3:#161628;--rim:rgba(255,255,255,0.055);--rim2:rgba(255,255,255,0.09);--gold:#b8973a;--gold-lt:#d4b96a;--gold-dim:rgba(184,151,58,0.12);--gold-glow:rgba(184,151,58,0.22);--platinum:#e8e6f0;--silver:#a09eb8;--fog:#46445e;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--void);color:var(--platinum);font-family:'Geist',sans-serif;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.amb{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.amb-o{position:absolute;border-radius:50%;filter:blur(100px);}
+.amb-o1{width:700px;height:700px;background:radial-gradient(circle,rgba(184,151,58,0.06) 0%,transparent 70%);top:-300px;right:-200px;animation:f1 25s ease-in-out infinite;}
+.amb-o2{width:500px;height:500px;background:radial-gradient(circle,rgba(100,80,200,0.05) 0%,transparent 70%);bottom:-200px;left:150px;animation:f2 18s ease-in-out infinite;}
+@keyframes f1{0%,100%{transform:translate(0,0);}50%{transform:translate(-50px,70px);}}
+@keyframes f2{0%,100%{transform:translate(0,0);}50%{transform:translate(60px,-50px);}}
+.shell{position:relative;z-index:1;display:grid;grid-template-columns:240px 1fr;height:100vh;}
+.sb{background:var(--base);border-right:1px solid var(--rim);display:flex;flex-direction:column;overflow:hidden;}
+.sb-head{padding:20px 16px 14px;border-bottom:1px solid var(--rim);}
+.logo{display:flex;align-items:center;gap:9px;margin-bottom:16px;}
+.logo-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:600;letter-spacing:0.06em;}
+.logo-name span{background:linear-gradient(135deg,var(--gold),var(--gold-lt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.limit-wrap{margin-bottom:12px;}
+.limit-row{display:flex;justify-content:space-between;margin-bottom:5px;}
+.limit-label{font-size:0.67rem;color:var(--silver);letter-spacing:0.06em;text-transform:uppercase;}
+.limit-count{font-size:0.67rem;font-family:'Geist Mono',monospace;color:var(--gold-lt);}
+.limit-count.low{color:#f59e0b;}
+.limit-count.none{color:#ef4444;}
+.limit-track{height:3px;background:var(--l3);border-radius:99px;overflow:hidden;}
+.limit-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-lt));border-radius:99px;transition:width 0.5s;}
+.limit-fill.low{background:linear-gradient(90deg,#f59e0b,#fbbf24);}
+.limit-fill.none{background:linear-gradient(90deg,#ef4444,#f87171);}
+.nchat{width:100%;padding:9px 14px;background:var(--gold-dim);border:1px solid rgba(184,151,58,0.2);border-radius:8px;color:var(--gold-lt);font-family:'Geist',sans-serif;font-size:0.75rem;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:all 0.2s;}
+.nchat:hover{background:rgba(184,151,58,0.2);box-shadow:0 0 18px var(--gold-glow);}
+.sb-nav{flex:1;overflow-y:auto;padding:12px 8px;scrollbar-width:none;}
+.sb-nav::-webkit-scrollbar{display:none;}
+.nav-sec{font-size:0.59rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--fog);padding:0 8px;margin-bottom:5px;margin-top:12px;}
+.nav-it{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:7px;cursor:pointer;transition:all 0.15s;color:var(--silver);font-size:0.78rem;border:1px solid transparent;}
+.nav-it:hover{background:var(--l2);color:var(--platinum);border-color:var(--rim);}
+.ni{width:16px;text-align:center;font-size:0.82rem;}
+.sb-foot{padding:12px 14px;border-top:1px solid var(--rim);}
+.sys-pill{display:flex;align-items:center;gap:7px;padding:7px 12px;background:var(--l1);border:1px solid var(--rim);border-radius:40px;font-size:0.67rem;color:var(--silver);}
+.sys-dot{width:5px;height:5px;background:#4ade80;border-radius:50%;box-shadow:0 0 7px rgba(74,222,128,0.6);animation:blink 2.5s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.main{display:flex;flex-direction:column;height:100vh;background:var(--l1);}
+.bar{height:52px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 24px;border-bottom:1px solid var(--rim);background:rgba(6,6,15,0.7);backdrop-filter:blur(24px);}
+.bar-l{display:flex;align-items:center;gap:10px;}
+.bar-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;}
+.bar-badge{padding:3px 10px;background:var(--gold-dim);border:1px solid rgba(184,151,58,0.22);border-radius:20px;font-size:0.62rem;color:var(--gold-lt);letter-spacing:0.08em;text-transform:uppercase;}
+.bar-r{display:flex;gap:5px;}
+.brbtn{width:30px;height:30px;background:transparent;border:1px solid var(--rim);border-radius:7px;color:var(--silver);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;}
+.brbtn:hover{background:var(--l3);color:var(--platinum);}
+.msgs{flex:1;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--fog) transparent;display:flex;flex-direction:column;}
+.msgs-inner{flex:1;max-width:780px;width:100%;margin:0 auto;padding:28px;display:flex;flex-direction:column;gap:0;}
+.welcome{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;min-height:440px;}
+.w-gem{width:64px;height:64px;margin-bottom:24px;animation:gemGlow 4s ease-in-out infinite;}
+@keyframes gemGlow{0%,100%{filter:drop-shadow(0 0 10px rgba(184,151,58,0.3));}50%{filter:drop-shadow(0 0 28px rgba(184,151,58,0.6));}}
+.w-eye{font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:12px;}
+.w-h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;line-height:1.1;margin-bottom:12px;}
+.w-h1 em{font-style:italic;background:linear-gradient(135deg,var(--gold),var(--gold-lt),#a0c4e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.w-sub{font-size:0.85rem;color:var(--silver);max-width:380px;line-height:1.7;margin-bottom:32px;}
+.caps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:560px;margin-bottom:28px;}
+.cap{background:var(--l2);border:1px solid var(--rim);border-radius:11px;padding:14px 12px;cursor:pointer;text-align:left;transition:all 0.2s;position:relative;overflow:hidden;}
+.cap:hover{border-color:rgba(184,151,58,0.28);transform:translateY(-2px);box-shadow:0 12px 32px rgba(0,0,0,0.5);}
+.c-ico{font-size:1.1rem;margin-bottom:8px;display:block;}
+.c-t{font-size:0.74rem;font-weight:600;color:var(--platinum);margin-bottom:2px;}
+.c-d{font-size:0.66rem;color:var(--silver);line-height:1.4;}
+.dvd{display:flex;align-items:center;gap:12px;width:100%;max-width:560px;margin-bottom:16px;}
+.dvd-l{flex:1;height:1px;background:var(--rim);}
+.dvd-t{font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fog);}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:560px;}
+.chip{padding:6px 13px;background:var(--l2);border:1px solid var(--rim);border-radius:40px;font-size:0.72rem;color:var(--silver);cursor:pointer;transition:all 0.15s;}
+.chip:hover{background:var(--l3);border-color:var(--rim2);color:var(--platinum);}
+.mrow{display:flex;padding:6px 0;animation:mIn 0.25s ease;}
+@keyframes mIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.mrow.ai{justify-content:flex-start;}
+.mrow.user{justify-content:flex-end;}
+.mrow.ai .mcwrap{display:flex;gap:10px;max-width:82%;}
+.aico{width:26px;height:26px;background:var(--l3);border:1px solid var(--rim2);border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.mbody{flex:1;}
+.msender{font-size:0.63rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;display:flex;align-items:center;gap:7px;}
+.mrow.ai .msender{color:var(--gold-lt);}
+.mrow.user .msender{color:#7eb8d4;justify-content:flex-end;}
+.mtime{font-size:0.6rem;color:var(--fog);font-weight:400;letter-spacing:0;text-transform:none;}
+.bbl{padding:12px 15px;border-radius:12px;font-size:0.855rem;line-height:1.75;}
+.mrow.ai .bbl{background:var(--l2);border:1px solid var(--rim);border-top-left-radius:3px;color:#d8d5f0;}
+.mrow.user .bbl{background:linear-gradient(135deg,#1a1a2e,#141426);border:1px solid var(--rim2);border-top-right-radius:3px;color:var(--platinum);max-width:70%;margin-left:auto;}
+.bbl code{background:rgba(184,151,58,0.1);border:1px solid rgba(184,151,58,0.15);color:var(--gold-lt);padding:1px 5px;border-radius:4px;font-family:'Geist Mono',monospace;font-size:0.8em;}
+.bbl pre{background:var(--void);border:1px solid var(--rim2);border-radius:8px;padding:13px 15px;margin:10px 0;overflow-x:auto;}
+.bbl pre code{background:transparent;border:none;color:#85d99b;padding:0;font-size:0.78rem;line-height:1.65;}
+.bbl strong{color:var(--platinum);font-weight:600;}
+.trow{display:flex;gap:10px;padding:6px 0;}
+.tbbl{background:var(--l2);border:1px solid var(--rim);border-radius:12px;border-top-left-radius:3px;padding:13px 15px;display:flex;gap:5px;align-items:center;}
+.td{width:6px;height:6px;background:var(--fog);border-radius:50%;animation:tb 1.3s ease-in-out infinite;}
+.td:nth-child(2){animation-delay:0.17s;}
+.td:nth-child(3){animation-delay:0.34s;}
+@keyframes tb{0%,60%,100%{transform:translateY(0);background:var(--fog);}30%{transform:translateY(-7px);background:var(--gold-lt);}}
+.izone{flex-shrink:0;padding:14px 24px 20px;border-top:1px solid var(--rim);background:rgba(6,6,15,0.7);backdrop-filter:blur(24px);}
+.iinner{max-width:780px;margin:0 auto;}
+.iframe{background:var(--l2);border:1px solid var(--rim2);border-radius:13px;padding:4px 4px 4px 16px;display:flex;align-items:flex-end;gap:7px;transition:all 0.2s;position:relative;}
+.iframe:focus-within{border-color:rgba(184,151,58,0.4);box-shadow:0 0 0 1px rgba(184,151,58,0.2),0 8px 32px rgba(0,0,0,0.5);}
+#inp{flex:1;background:transparent;border:none;outline:none;font-family:'Geist',sans-serif;font-size:0.88rem;color:var(--platinum);resize:none;padding:11px 0;max-height:150px;line-height:1.55;}
+#inp::placeholder{color:var(--fog);}
+.sbtn{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),#9a7a28);border:none;border-radius:8px;color:#03030a;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;}
+.sbtn:hover{transform:scale(1.08);box-shadow:0 6px 20px var(--gold-glow);}
+.sbtn:disabled{opacity:0.28;cursor:not-allowed;transform:none;}
+.iacts{padding:5px;}
+.ifoot{display:flex;justify-content:space-between;margin-top:7px;padding:0 2px;}
+.itip{font-size:0.63rem;color:var(--fog);}
+.mchip{font-size:0.63rem;color:var(--fog);}
+
+/* PRICING MODAL */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(12px);z-index:1000;align-items:center;justify-content:center;}
+.modal-ov.show{display:flex;}
+.modal{background:linear-gradient(160deg,var(--l2),var(--l1));border:1px solid var(--rim2);border-radius:20px;width:92%;max-width:580px;max-height:90vh;overflow-y:auto;position:relative;animation:mPop 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+@keyframes mPop{from{opacity:0;transform:scale(0.88) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+.modal::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.modal-close{position:absolute;top:12px;right:12px;width:27px;height:27px;background:var(--l3);border:1px solid var(--rim);border-radius:7px;color:var(--silver);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.85rem;transition:all 0.15s;z-index:1;}
+.modal-close:hover{color:var(--platinum);}
+.modal-inner{padding:28px 24px;}
+.limit-banner{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:10px;margin-bottom:24px;}
+.lb-ico{font-size:1.4rem;}
+.lb-t{font-size:0.78rem;font-weight:600;color:#fca5a5;margin-bottom:2px;}
+.lb-s{font-size:0.7rem;color:var(--silver);}
+.p-head{text-align:center;margin-bottom:24px;}
+.p-eye{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.p-h{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:600;color:var(--platinum);margin-bottom:5px;}
+.p-s{font-size:0.78rem;color:var(--silver);}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.plan{background:var(--l3);border:1px solid var(--rim);border-radius:12px;padding:16px 12px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;overflow:hidden;}
+.plan:hover{border-color:rgba(184,151,58,0.3);transform:translateY(-2px);}
+.plan.pop{border-color:rgba(184,151,58,0.35);}
+.pop-tag{position:absolute;top:0;right:0;background:linear-gradient(135deg,var(--gold),var(--gold-lt));color:#03030a;font-size:0.55rem;font-weight:700;letter-spacing:0.1em;padding:3px 8px;border-bottom-left-radius:7px;text-transform:uppercase;}
+.plan-ico{font-size:1.3rem;margin-bottom:8px;display:block;}
+.plan-n{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;margin-bottom:3px;}
+.plan-price{font-size:1.4rem;font-weight:600;margin-bottom:2px;}
+.plan-price sup{font-size:0.65rem;vertical-align:super;font-weight:400;}
+.plan-price sub{font-size:0.6rem;font-weight:300;color:var(--silver);}
+.plan-msgs{font-size:0.68rem;color:var(--silver);margin-bottom:8px;}
+.plan-feats{list-style:none;font-size:0.67rem;color:var(--silver);text-align:left;display:flex;flex-direction:column;gap:3px;}
+.plan-feats li::before{content:'✦ ';color:var(--gold);font-size:0.5rem;}
+.plan.free .plan-price{color:var(--silver);}
+.plan.basic .plan-price{color:#7eb8d4;}
+.plan.pro .plan-price{color:var(--gold-lt);}
+.plan-sel{text-align:center;font-size:0.72rem;color:var(--silver);margin-bottom:16px;}
+.plan-sel span{color:var(--gold-lt);font-weight:600;}
+.pay-sec{margin-bottom:16px;}
+.pay-title{font-size:0.63rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--fog);margin-bottom:8px;padding-bottom:7px;border-bottom:1px solid var(--rim);}
+.pay-card{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:var(--l3);border:1px solid var(--rim);border-radius:10px;cursor:pointer;transition:all 0.2s;margin-bottom:7px;}
+.pay-card:hover{border-color:var(--rim2);transform:translateX(3px);}
+.pay-card.paypal:hover{border-color:rgba(0,112,240,0.3);}
+.pay-card.tng:hover{border-color:rgba(0,200,100,0.3);}
+.pc-l{display:flex;align-items:center;gap:10px;}
+.pc-logo{width:34px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:700;}
+.paypal .pc-logo{background:linear-gradient(135deg,#003087,#009cde);color:white;}
+.tng .pc-logo{background:linear-gradient(135deg,#00543d,#00a86b);color:white;}
+.pc-name{font-size:0.76rem;font-weight:600;color:var(--platinum);margin-bottom:1px;}
+.pc-note{font-size:0.64rem;color:var(--silver);}
+.pc-tag{padding:2px 7px;border-radius:20px;font-size:0.58rem;font-weight:500;}
+.paypal .pc-tag{background:rgba(0,112,240,0.15);color:#60a5fa;border:1px solid rgba(0,112,240,0.2);}
+.tng .pc-tag{background:rgba(0,200,100,0.12);color:#4ade80;border:1px solid rgba(0,200,100,0.2);}
+
+/* PAYMENT MODAL */
+.pay-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);backdrop-filter:blur(16px);z-index:2000;align-items:center;justify-content:center;}
+.pay-modal.show{display:flex;}
+.pay-inner{background:linear-gradient(160deg,var(--l2),var(--l1));border:1px solid var(--rim2);border-radius:18px;width:90%;max-width:380px;padding:26px;position:relative;animation:mPop 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;}
+.pay-inner::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.pay-head{text-align:center;margin-bottom:20px;}
+.pay-head h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:3px;}
+.pay-head p{font-size:0.74rem;color:var(--silver);}
+.pay-amount-box{background:var(--l3);border:1px solid var(--rim2);border-radius:10px;padding:14px;text-align:center;margin-bottom:18px;}
+.pay-plan-name{font-size:0.67rem;color:var(--silver);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px;}
+.pay-amount{font-size:1.9rem;font-weight:600;font-family:'Geist',monospace;}
+.pay-amount.paypal-color{color:#60a5fa;}
+.pay-amount.tng-color{color:#4ade80;}
+.pay-period{font-size:0.68rem;color:var(--silver);}
+.pay-form{display:flex;flex-direction:column;gap:10px;}
+.pay-input{width:100%;padding:10px 13px;background:var(--l3);border:1px solid var(--rim2);border-radius:8px;color:var(--platinum);font-family:'Geist',sans-serif;font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.pay-input:focus{border-color:rgba(184,151,58,0.4);}
+.pay-input::placeholder{color:var(--fog);}
+.pay-submit{width:100%;padding:11px;border:none;border-radius:8px;font-family:'Geist',sans-serif;font-weight:600;font-size:0.82rem;cursor:pointer;transition:all 0.2s;}
+.pay-submit.paypal-btn{background:linear-gradient(135deg,#003087,#009cde);color:white;}
+.pay-submit.tng-btn{background:linear-gradient(135deg,#00543d,#00a86b);color:white;}
+.pay-submit:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,0.4);}
+.pay-cancel{width:100%;padding:8px;background:transparent;border:1px solid var(--rim);border-radius:8px;color:var(--silver);font-family:'Geist',sans-serif;font-size:0.76rem;cursor:pointer;transition:all 0.15s;margin-top:2px;}
+.pay-cancel:hover{border-color:var(--rim2);color:var(--platinum);}
+.pay-secure{display:flex;align-items:center;justify-content:center;gap:5px;font-size:0.62rem;color:var(--fog);margin-top:8px;}
+.toast{position:fixed;top:16px;left:50%;transform:translateX(-50%) translateY(-80px);background:var(--l3);border:1px solid var(--rim2);color:var(--platinum);padding:9px 18px;border-radius:40px;font-size:0.75rem;z-index:9999;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);white-space:nowrap;box-shadow:0 16px 40px rgba(0,0,0,0.6);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast.gold{border-color:rgba(184,151,58,0.4);}
+.toast.green{border-color:rgba(74,222,128,0.4);}
+.toast.red{border-color:rgba(239,68,68,0.4);}
+@media(max-width:700px){.shell{grid-template-columns:1fr;}.sb{display:none;}.msgs-inner{padding:18px 14px;}.izone{padding:10px 14px 16px;}.caps{grid-template-columns:1fr 1fr;}.plans{grid-template-columns:1fr;}.mrow.ai .mcwrap{max-width:93%;}}
+</style>
 </head>
 <body>
-<script src="app.js"></script>
+<div class="amb"><div class="amb-o amb-o1"></div><div class="amb-o amb-o2"></div></div>
+<div class="shell">
+<aside class="sb">
+  <div class="sb-head">
+    <div class="logo">
+      <svg width="24" height="24" viewBox="0 0 34 34" fill="none"><path d="M17 2L30 9.5V24.5L17 32L4 24.5V9.5L17 2Z" stroke="url(#lg1)" stroke-width="1.1"/><circle cx="17" cy="17" r="3.5" fill="url(#lg1)"/><defs><linearGradient id="lg1" x1="4" y1="2" x2="30" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#b8973a"/><stop offset="1" stop-color="#7eb8d4"/></linearGradient></defs></svg>
+      <div class="logo-name"><span>Adaems</span> AI</div>
+    </div>
+    <div class="limit-wrap">
+      <div class="limit-row"><span class="limit-label">Daily Messages</span><span class="limit-count" id="limitCount">5 / 5</span></div>
+      <div class="limit-track"><div class="limit-fill" id="limitFill" style="width:100%"></div></div>
+    </div>
+    <button class="nchat" onclick="newChat()">+ New Conversation</button>
+  </div>
+  <nav class="sb-nav">
+    <div class="nav-sec">Explore</div>
+    <div class="nav-it"><span class="ni">💬</span>Chat</div>
+    <div class="nav-it" onclick="suggest('Help me write a professional email')"><span class="ni">✍️</span>Writing</div>
+    <div class="nav-it" onclick="suggest('Write a Python function for me')"><span class="ni">⌨️</span>Code</div>
+    <div class="nav-it" onclick="suggest('Analyze this business strategy')"><span class="ni">🔍</span>Analysis</div>
+    <div class="nav-sec">Topics</div>
+    <div class="nav-it" onclick="suggest('Explain how neural networks work')"><span class="ni">🧠</span>Science & AI</div>
+    <div class="nav-it" onclick="suggest('What caused World War II?')"><span class="ni">📜</span>History</div>
+    <div class="nav-it" onclick="suggest('How do I start investing with RM500?')"><span class="ni">📈</span>Finance</div>
+    <div class="nav-it" onclick="suggest('Best daily habits for mental wellness')"><span class="ni">🧘</span>Wellbeing</div>
+    <div class="nav-it" onclick="suggest('Translate to Japanese: Good morning')"><span class="ni">🌐</span>Languages</div>
+    <div class="nav-it" onclick="suggest('Write a short creative story')"><span class="ni">🎭</span>Creative</div>
+  </nav>
+  <div class="sb-foot"><div class="sys-pill"><div class="sys-dot"></div>All systems operational</div></div>
+</aside>
+<div class="main">
+  <div class="bar">
+    <div class="bar-l"><div class="bar-title">Adaems AI</div><div class="bar-badge" id="planBadge">Free Plan</div></div>
+    <div class="bar-r">
+      <button class="brbtn" title="Upgrade" onclick="showPricing(false)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></button>
+      <button class="brbtn" title="Clear" onclick="newChat()"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg></button>
+    </div>
+  </div>
+  <div class="msgs" id="msgs"><div class="msgs-inner" id="msgsInner">
+    <div class="welcome" id="welcome">
+      <div class="w-gem"><svg viewBox="0 0 70 70" fill="none"><path d="M35 4L62 19.5V50.5L35 66L8 50.5V19.5L35 4Z" stroke="url(#wg1)" stroke-width="1.2"/><circle cx="35" cy="36" r="5.5" fill="url(#wg1)"/><defs><linearGradient id="wg1" x1="8" y1="4" x2="62" y2="66" gradientUnits="userSpaceOnUse"><stop stop-color="#b8973a"/><stop offset="0.5" stop-color="#d4b96a"/><stop offset="1" stop-color="#7eb8d4"/></linearGradient></defs></svg></div>
+      <div class="w-eye">Next Generation Intelligence</div>
+      <h1 class="w-h1">Ask anything.<br><em>Discover everything.</em></h1>
+      <p class="w-sub">Adaems AI answers any question with precision and depth — science, code, writing, and beyond.</p>
+      <div class="caps">
+        <div class="cap" onclick="suggest('Explain black holes simply')"><span class="c-ico">🌌</span><div class="c-t">Deep Knowledge</div><div class="c-d">Science, history, facts</div></div>
+        <div class="cap" onclick="suggest('Write a sorting algorithm in Python')"><span class="c-ico">⌨️</span><div class="c-t">Code Mastery</div><div class="c-d">Any language</div></div>
+        <div class="cap" onclick="suggest('Write a luxury brand tagline')"><span class="c-ico">✦</span><div class="c-t">Refined Writing</div><div class="c-d">Copy, essays, stories</div></div>
+        <div class="cap" onclick="suggest('Build a 6-month startup roadmap')"><span class="c-ico">📈</span><div class="c-t">Strategy</div><div class="c-d">Business & planning</div></div>
+        <div class="cap" onclick="suggest('Solve: integrate e^x sin(x) dx')"><span class="c-ico">∑</span><div class="c-t">Mathematics</div><div class="c-d">Any level</div></div>
+        <div class="cap" onclick="suggest('Translate and explain culturally: Sakura ga chiru')"><span class="c-ico">🌐</span><div class="c-t">Languages</div><div class="c-d">50+ languages</div></div>
+      </div>
+      <div class="dvd"><div class="dvd-l"></div><div class="dvd-t">Quick start</div><div class="dvd-l"></div></div>
+      <div class="chips">
+        <div class="chip" onclick="suggest('What is dark matter?')">Dark matter</div>
+        <div class="chip" onclick="suggest('Write a React modal component')">React code</div>
+        <div class="chip" onclick="suggest('Best investment strategies 2025')">Investing</div>
+        <div class="chip" onclick="suggest('Write a poem about the ocean')">Poetry</div>
+        <div class="chip" onclick="suggest('How does CRISPR work?')">CRISPR</div>
+        <div class="chip" onclick="suggest('Explain blockchain simply')">Blockchain</div>
+      </div>
+    </div>
+  </div></div>
+  <div class="izone"><div class="iinner">
+    <div class="iframe">
+      <textarea id="inp" placeholder="Ask Adaems AI anything…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <div class="iacts"><button class="sbtn" id="sbtn" onclick="send()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button></div>
+    </div>
+    <div class="ifoot"><span class="itip">↵ Send · ⇧↵ New line</span><span class="mchip">adaems-ai · openrouter</span></div>
+  </div></div>
+</div>
+</div>
+
+<!-- PRICING MODAL -->
+<div class="modal-ov" id="pricingModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePricing()">✕</button>
+    <div class="modal-inner">
+      <div class="limit-banner" id="limitBanner" style="display:none"><span class="lb-ico">🚫</span><div><div class="lb-t">Daily message limit reached</div><div class="lb-s">Upgrade to continue chatting with Adaems AI</div></div></div>
+      <div class="p-head"><div class="p-eye">Choose Your Plan</div><div class="p-h">Unlock Adaems AI</div><div class="p-s">Simple pricing. Cancel anytime.</div></div>
+      <div class="plans">
+        <div class="plan free" onclick="selectPlan('free',event)"><span class="plan-ico">🌱</span><div class="plan-n">Starter</div><div class="plan-price"><sup>RM</sup>0<sub>/mo</sub></div><div class="plan-msgs">5 msg/day</div><ul class="plan-feats"><li>Basic answers</li><li>5 topics</li></ul></div>
+        <div class="plan basic pop" onclick="selectPlan('basic',event)"><div class="pop-tag">Popular</div><span class="plan-ico">⚡</span><div class="plan-n">Pro</div><div class="plan-price"><sup>RM</sup>19<sub>/mo</sub></div><div class="plan-msgs">200 msg/day</div><ul class="plan-feats"><li>Full capabilities</li><li>All topics</li><li>Priority speed</li></ul></div>
+        <div class="plan pro" onclick="selectPlan('elite',event)"><span class="plan-ico">♾️</span><div class="plan-n">Elite</div><div class="plan-price"><sup>RM</sup>49<sub>/mo</sub></div><div class="plan-msgs">Unlimited</div><ul class="plan-feats"><li>Unlimited access</li><li>Fastest speed</li><li>Priority support</li></ul></div>
+      </div>
+      <div class="plan-sel" id="planSelLabel">Select a plan above to proceed</div>
+      <div class="pay-sec"><div class="pay-title">🌍 International Payment</div>
+        <div class="pay-card paypal" onclick="openPayment('paypal')"><div class="pc-l"><div class="pc-logo">PP</div><div><div class="pc-name">PayPal</div><div class="pc-note">Worldwide · Secure · Instant</div></div></div><span class="pc-tag">GLOBAL</span></div>
+      </div>
+      <div class="pay-sec"><div class="pay-title">🇲🇾 Malaysia Only</div>
+        <div class="pay-card tng" onclick="openPayment('tng')"><div class="pc-l"><div class="pc-logo">TNG</div><div><div class="pc-name">Touch 'n Go eWallet</div><div class="pc-note">Malaysia only · Instant transfer</div></div></div><span class="pc-tag">MY ONLY</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="pay-modal" id="payModal">
+  <div class="pay-inner">
+    <button class="modal-close" onclick="closePayModal()" style="position:absolute;top:12px;right:12px;">✕</button>
+    <div class="pay-head"><h3 id="pmTitle">Checkout</h3><p id="pmSub">Complete your payment</p></div>
+    <div class="pay-amount-box"><div class="pay-plan-name" id="pmPlanName">Pro Plan</div><div class="pay-amount" id="pmAmount">RM19</div><div class="pay-period">per month · cancel anytime</div></div>
+    <div class="pay-form">
+      <input class="pay-input" id="pmEmail" type="email" placeholder="Email address">
+      <input class="pay-input" id="pmName" type="text" placeholder="Full name">
+      <div id="pmExtra"></div>
+      <button class="pay-submit" id="pmBtn" onclick="processPayment()">Confirm Payment</button>
+      <button class="pay-cancel" onclick="closePayModal()">Cancel</button>
+    </div>
+    <div class="pay-secure">🔒 Secured with 256-bit encryption</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const PLANS={free:{name:'Starter',limit:5,price:0},basic:{name:'Pro',limit:200,price:19},elite:{name:'Elite',limit:9999,price:49}};
+let state=JSON.parse(localStorage.getItem('adaems_state')||'null')||{plan:'free',msgLeft:5,lastReset:new Date().toDateString()};
+if(state.lastReset!==new Date().toDateString()){state.msgLeft=PLANS[state.plan].limit;state.lastReset=new Date().toDateString();saveState();}
+let history=[],busy=false,selectedPlan=null,payMethod=null;
+function saveState(){localStorage.setItem('adaems_state',JSON.stringify(state));}
+function updateLimitUI(){
+  const total=PLANS[state.plan].limit,left=Math.max(0,state.msgLeft),pct=total>=9999?100:(left/total*100);
+  const c=document.getElementById('limitCount'),f=document.getElementById('limitFill'),b=document.getElementById('planBadge');
+  c.textContent=total>=9999?'∞ Unlimited':`${left} / ${total}`;
+  f.style.width=pct+'%';
+  c.className='limit-count';f.className='limit-fill';
+  if(left===0){c.classList.add('none');f.classList.add('none');}
+  else if(pct<=30){c.classList.add('low');f.classList.add('low');}
+  b.textContent=PLANS[state.plan].name+' Plan';
+}
+updateLimitUI();
+function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,150)+'px';}
+function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send();}}
+function suggest(txt){document.getElementById('inp').value=txt;autoResize(document.getElementById('inp'));send();}
+function newChat(){history=[];document.getElementById('msgsInner').innerHTML=`<div class="welcome" id="welcome"><div class="w-gem"><svg viewBox="0 0 70 70" fill="none"><path d="M35 4L62 19.5V50.5L35 66L8 50.5V19.5L35 4Z" stroke="url(#rwg)" stroke-width="1.2"/><circle cx="35" cy="36" r="5.5" fill="url(#rwg)"/><defs><linearGradient id="rwg" x1="8" y1="4" x2="62" y2="66" gradientUnits="userSpaceOnUse"><stop stop-color="#b8973a"/><stop offset="1" stop-color="#7eb8d4"/></linearGradient></defs></svg></div><div class="w-eye">Next Generation Intelligence</div><h1 class="w-h1">Ask anything.<br><em>Discover everything.</em></h1><div class="chips" style="margin-top:20px"><div class="chip" onclick="suggest('What is dark matter?')">Dark matter</div><div class="chip" onclick="suggest('Write a React modal')">React code</div><div class="chip" onclick="suggest('Best investments 2025')">Investing</div><div class="chip" onclick="suggest('Write a poem')">Poetry</div></div></div>`;document.getElementById('inp').focus();}
+async function send(){
+  if(busy)return;
+  const inp=document.getElementById('inp'),txt=inp.value.trim();
+  if(!txt)return;
+  if(state.msgLeft<=0){showPricing(true);return;}
+  const welcome=document.getElementById('welcome');
+  if(welcome)welcome.remove();
+  inp.value='';inp.style.height='auto';
+  addMsg('user',txt);history.push({role:'user',content:txt});
+  const typing=addTyping();
+  busy=true;document.getElementById('sbtn').disabled=true;
+  try{
+    const reply=await callAI();
+    typing.remove();addMsg('ai',reply);history.push({role:'assistant',content:reply});
+    if(state.plan==='free'||state.msgLeft<9999){state.msgLeft=Math.max(0,state.msgLeft-1);saveState();updateLimitUI();}
+    if(state.plan==='free'&&state.msgLeft===1)showToast('⚠️ Last message remaining today','gold');
+  }catch(err){typing.remove();addMsg('ai','⚠️ '+(err.message||'Connection error. Please try again.'));}
+  busy=false;document.getElementById('sbtn').disabled=false;inp.focus();
+}
+async function callAI(){
+  const res=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:history})});
+  const data=await res.json();
+  if(data.error)throw new Error(data.error);
+  return data.reply||'No response.';
+}
+function esc(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function fmt(text){
+  text=text.replace(/```(\w*)\n?([\s\S]*?)```/g,(_,l,c)=>`<pre data-lang="${l||'code'}"><code>${esc(c.trim())}</code></pre>`);
+  text=text.replace(/`([^`\n]+)`/g,'<code>$1</code>');
+  text=text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>');
+  text=text.replace(/\n/g,'<br>');
+  return text;
+}
+function now(){return new Date().toLocaleTimeString('en-MY',{hour:'2-digit',minute:'2-digit'});}
+function addMsg(role,text){
+  const inner=document.getElementById('msgsInner'),t=now(),div=document.createElement('div');
+  div.className='mrow '+role;
+  if(role==='ai'){div.innerHTML=`<div class="mcwrap"><div class="aico"><svg width="11" height="11" viewBox="0 0 34 34" fill="none"><path d="M17 2L30 9.5V24.5L17 32L4 24.5V9.5L17 2Z" stroke="url(#ma)" stroke-width="1.1"/><circle cx="17" cy="17" r="3.5" fill="url(#ma)"/><defs><linearGradient id="ma" x1="4" y1="2" x2="30" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#b8973a"/><stop offset="1" stop-color="#7eb8d4"/></linearGradient></defs></svg></div><div class="mbody"><div class="msender">Adaems <span class="mtime">${t}</span></div><div class="bbl">${fmt(text)}</div></div></div>`;}
+  else{div.innerHTML=`<div><div class="msender" style="justify-content:flex-end;margin-bottom:5px">You <span class="mtime">${t}</span></div><div class="bbl">${fmt(text)}</div></div>`;}
+  inner.appendChild(div);inner.parentElement.scrollTop=inner.parentElement.scrollHeight;
+}
+function addTyping(){
+  const inner=document.getElementById('msgsInner'),wrap=document.createElement('div');
+  wrap.className='trow';
+  wrap.innerHTML=`<div class="aico"><svg width="11" height="11" viewBox="0 0 34 34" fill="none"><path d="M17 2L30 9.5V24.5L17 32L4 24.5V9.5L17 2Z" stroke="url(#ta)" stroke-width="1.1"/><circle cx="17" cy="17" r="3.5" fill="url(#ta)"/><defs><linearGradient id="ta" x1="4" y1="2" x2="30" y2="32" gradientUnits="userSpaceOnUse"><stop stop-color="#b8973a"/><stop offset="1" stop-color="#7eb8d4"/></linearGradient></defs></svg></div><div class="tbbl"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;
+  inner.appendChild(wrap);inner.parentElement.scrollTop=inner.parentElement.scrollHeight;
+  return wrap;
+}
+function showPricing(isLimit){document.getElementById('limitBanner').style.display=isLimit?'flex':'none';selectedPlan=null;document.getElementById('planSelLabel').textContent='Select a plan above to proceed';document.getElementById('pricingModal').classList.add('show');}
+function closePricing(){document.getElementById('pricingModal').classList.remove('show');}
+function selectPlan(planKey,e){
+  selectedPlan=planKey;
+  if(planKey==='free'){showToast('You are already on the free plan','');return;}
+  const plan=PLANS[planKey];
+  document.getElementById('planSelLabel').innerHTML=`Selected: <span>${plan.name} — RM${plan.price}/mo</span> · Choose payment below`;
+  document.querySelectorAll('.plan').forEach(p=>{p.style.opacity='0.5';p.style.borderColor='';});
+  e.currentTarget.style.opacity='1';e.currentTarget.style.borderColor='rgba(184,151,58,0.5)';
+}
+function openPayment(method){
+  if(!selectedPlan||selectedPlan==='free'){showToast('Please select a plan first ↑','gold');return;}
+  payMethod=method;const plan=PLANS[selectedPlan];
+  document.getElementById('pmPlanName').textContent=plan.name+' Plan · Monthly';
+  document.getElementById('pmAmount').textContent='RM'+plan.price;
+  if(method==='paypal'){
+    document.getElementById('pmTitle').textContent='PayPal Checkout';
+    document.getElementById('pmSub').textContent='International payment · Secure & instant';
+    document.getElementById('pmAmount').className='pay-amount paypal-color';
+    document.getElementById('pmBtn').className='pay-submit paypal-btn';
+    document.getElementById('pmBtn').textContent='💳 Pay with PayPal';
+    document.getElementById('pmExtra').innerHTML='<input class="pay-input" id="pmPaypalId" type="text" placeholder="PayPal email">';
+  }else{
+    document.getElementById('pmTitle').textContent="Touch 'n Go eWallet";
+    document.getElementById('pmSub').textContent='Malaysia only · Instant activation';
+    document.getElementById('pmAmount').className='pay-amount tng-color';
+    document.getElementById('pmBtn').className='pay-submit tng-btn';
+    document.getElementById('pmBtn').textContent='📱 Pay with TNG eWallet';
+    document.getElementById('pmExtra').innerHTML='<input class="pay-input" id="pmPhone" type="text" placeholder="TNG registered phone (+60...)"><input class="pay-input" style="margin-top:8px" id="pmRef" type="text" placeholder="Transaction reference">';
+  }
+  document.getElementById('payModal').classList.add('show');
+}
+function closePayModal(){document.getElementById('payModal').classList.remove('show');}
+function processPayment(){
+  const email=document.getElementById('pmEmail').value.trim(),name=document.getElementById('pmName').value.trim();
+  if(!email||!name){showToast('Please fill in all fields','red');return;}
+  const btn=document.getElementById('pmBtn');btn.disabled=true;btn.textContent='⏳ Processing…';
+  setTimeout(()=>{
+    state.plan=selectedPlan;state.msgLeft=PLANS[selectedPlan].limit;state.lastReset=new Date().toDateString();
+    saveState();updateLimitUI();closePayModal();closePricing();
+    showToast(`🎉 ${PLANS[selectedPlan].name} Plan activated!`,'green');
+    btn.disabled=false;
+  },2200);
+}
+document.getElementById('pricingModal').addEventListener('click',e=>{if(e.target===document.getElementById('pricingModal'))closePricing();});
+document.getElementById('payModal').addEventListener('click',e=>{if(e.target===document.getElementById('payModal'))closePayModal();});
+let _tt;
+function showToast(msg,type=''){const el=document.getElementById('toast');el.textContent=msg;el.className='toast '+type;el.classList.add('show');clearTimeout(_tt);_tt=setTimeout(()=>el.classList.remove('show'),3500);}
+window.addEventListener('load',()=>document.getElementById('inp').focus());
+</script>
 </body>
 </html>
